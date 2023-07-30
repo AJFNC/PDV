@@ -6,4 +6,33 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Shared\NovaPasta\**" />
+    <Content Remove="Shared\NovaPasta\**" />
+    <EmbeddedResource Remove="Shared\NovaPasta\**" />
+    <None Remove="Shared\NovaPasta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Dialog.razor" />
+    <Content Remove="Pages\Info.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Dialog.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Dialog.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Info.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Info.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Shared\Components\Info.razor" />
+  </ItemGroup>
+
 </Project>
