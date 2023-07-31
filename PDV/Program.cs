@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
 using PDV.Data;
 
 namespace PDV
@@ -10,10 +12,15 @@ namespace PDV
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var connStr = builder.Configuration.GetConnectionString("E:\\repos\\PDV\\PDV\\Produtos.db");
+
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
+
+            builder.Services.AddDbContext<ProdutoContext>(options => options.UseSqlite("Data Source=E:\\repos\\PDV\\PDV\\Produtos.db"));
+            builder.Services.AddScoped<ProdutoService>();
 
             var app = builder.Build();
 
