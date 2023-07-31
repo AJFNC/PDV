@@ -37,7 +37,7 @@ namespace PDV.Data
                 var produtoSeek = _context.Produtos.FirstOrDefaultAsync(opt => opt.Id == produto.Id);
                 if (produtoSeek != null)
                 {
-                    _context.Update(produtoSeek);
+                    _context.Produtos.Update(await produtoSeek);
                     await _context.SaveChangesAsync();
                 }
             }
