@@ -34,10 +34,10 @@ namespace PDV.Data
         {
             try
             {
-                var produtoSeek = _context.Produtos.FirstOrDefaultAsync(opt => opt.Id == produto.Id);
+                var produtoSeek = await _context.Produtos.FirstOrDefaultAsync(opt => opt.Id == produto.Id);
                 if (produtoSeek != null)
                 {
-                    _context.Produtos.Update(await produtoSeek);
+                    _context.Produtos.Update(produtoSeek);
                     await _context.SaveChangesAsync();
                 }
             }
