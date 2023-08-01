@@ -14,12 +14,15 @@ namespace PDV
 
             var connStr = builder.Configuration.GetConnectionString("E:\\repos\\PDV\\PDV\\Produtos.db");
 
+            var connStrDev = "Data Source=E:\\repos\\PDV\\PDV\\Produtos.db";
+            var connStrPub = "Data Source=/home/opc/PDV/PDV/Produtos.db";
+
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
 
-            builder.Services.AddDbContext<ProdutoContext>(options => options.UseSqlite("Data Source=E:\\repos\\PDV\\PDV\\Produtos.db"));
+            builder.Services.AddDbContext<ProdutoContext>(options => options.UseSqlite(connStrPub));
             builder.Services.AddScoped<ProdutoService>();
 
             var app = builder.Build();

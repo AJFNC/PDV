@@ -22,7 +22,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       //"applicationUrl": "https://localhost:7021;http://localhost:5053",
-      "applicationUrl": "https://152.67.44.154:7021;http://152.67.44.154:5053",     //Para publicaçao
+      "applicationUrl": "https://10.0.0.127:7021;http://10.0.0.127:5053",     //Para publicaçao
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
