@@ -14,7 +14,7 @@ namespace PDV
 
             var connStr = builder.Configuration.GetConnectionString("E:\\repos\\PDV\\PDV\\Produtos.db");
 
-            //var connStrDev = "Data Source=E:\\repos\\PDV\\PDV\\Produtos.db";
+            ////var connStrDev = "Data Source=E:\\repos\\PDV\\PDV\\Produtos.db";
             var connStrPub = "Data Source=/home/opc/PDV/PDV/Produtos.db";
 
             // Add services to the container.
