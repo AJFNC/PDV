@@ -58,7 +58,7 @@ jobs:
 
     # Testing the ssh conection
     - name: Test ssh
-      run: ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} ls -ltr
+      run: ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} ls
     
     # Publish the project
     - name: Publish
