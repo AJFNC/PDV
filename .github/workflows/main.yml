@@ -65,6 +65,6 @@ jobs:
     # Deploy to the OCI VM
     - name: Deploy to the OCI VM Server
       run: |
-        #rsync -rv --dry-run  -P -e 'ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}' /home/runner/work//PDV/* opc@${{ secrets.SERVER }}:/home/opc/
-      
-        rsync -rv -P -e 'ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}' /home/runner/work/PDV/* ${{ secrets.USERNAME }}@${{ secrets.SERVER }}:/home/opc/
+        rsync -rv --dry-run  -P -e 'ssh -i /mnt/e/Oracle/ssh-key-2021-04-19.key' /home/runner/work/PDV/* opc@144.22.141.149:/home/opc/
+        #rsync -rv --dry-run  -P -e 'ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}' /home/runner/work/PDV/* opc@${{ secrets.SERVER }}:/home/opc/
+        #rsync -rv -P -e 'ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}' /home/runner/work/PDV/* ${{ secrets.USERNAME }}@${{ secrets.SERVER }}:/home/opc/
