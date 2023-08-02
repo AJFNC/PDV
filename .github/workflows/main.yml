@@ -55,6 +55,10 @@ jobs:
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
         config: ${{ secrets.CONFIG }}
         if_key_exists: fail
+
+    # Testing the ssh conection
+    - name: Test ssh
+      run: ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} ls -ltr
     
     # Publish the project
     - name: Publish
