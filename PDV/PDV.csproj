@@ -16,6 +16,7 @@
   <ItemGroup>
     <Content Remove="Pages\Dialog.razor" />
     <Content Remove="Pages\Info.razor" />
+    <Content Remove="Shared\Components\_Layout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Dialog.razor" />
     <_ContentIncludedByDefault Remove="Pages\Info.razor" />
+    <_ContentIncludedByDefault Remove="Shared\Components\Venda.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +41,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Shared\Components\Venda.razor" />
   </ItemGroup>
 
 </Project>

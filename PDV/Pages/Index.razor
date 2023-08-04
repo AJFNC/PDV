@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="name">Nome do Produto</label>
-    <input type="text" id="nome" class="form-control" @bind-value="@ChooseProduct.Nome" />
+    <input type="text" id="nome" class="form-control" @bind-value="@ChooseProduct.Nome" @onkeyup="(() => GetProdutoByNome())"/>
 </div>
 
 <div class="text-center p-3 mb-3">
