@@ -10,6 +10,18 @@
 
 
 @inject ProdutoService service
+
+<div class="p-3 mb-3 bg-primary text-white text-center">Busque um Produto</div>
+
+<div class="form-group">
+    <label for="name">Nome do Produto</label>
+    <input type="text" id="nome" class="form-control" @bind-value="@ChooseProduct.Nome" />
+</div>
+
+<div class="text-center p-3 mb-3">
+    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())"> Buscar Produto</button>
+</div>
+
 <div class="container">
     <div class="row bg-light">
         <table class="table table-bordered">
@@ -23,7 +35,7 @@
                     <th>Peso</th>
                     <th>Preço</th>
                     <th>Quantidade</th>
-                    <th>Apaga Produto</th>
+                    <th>Apague Produto</th>
                 </tr>
             </thead>
             <tbody>
@@ -132,10 +144,25 @@
     {
         await RefreshProducts();
     }
+
     private async Task RefreshProducts()
     {
         Produtos = await service.GetProdutosAsync();
+        //Produtos = await service.GetProdutoByNomeAsync();
     }
+
+    private async Task RefreshProductByNome(string nome)
+    {
+        Produtos = await service.GetProdutoByNomeAsync(nome);
+    }
+
+    Produto ChooseProduct = new Produto();
+    private async Task GetProdutoByNome()
+    {
+        //ChooseProduct = produto;
+        await RefreshProductByNome(ChooseProduct.Nome);
+    }
+
     public Produto NewProduct { get; set; } = new Produto();
     private async Task AddNewProduct()
     {

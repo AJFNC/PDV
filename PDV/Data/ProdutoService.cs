@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+
 namespace PDV.Data
 {
     public class ProdutoService
@@ -14,6 +15,19 @@ namespace PDV.Data
         public async Task<List<Produto>> GetProdutosAsync()
         {
             return await _context.Produtos.ToListAsync();
+        }
+
+        public async Task<List<Produto>> GetProdutoByNomeAsync(string nome)
+        {
+            //var produto = await _context.Produtos.Where(p => p.Nome.Contains(nome)).ToListAsync();
+
+            //if (produto != null)
+            //{
+            //    return produto;
+            //}
+            //return (List<Produto>)produto.DefaultIfEmpty<Produto>();
+
+            return await _context.Produtos.Where(p => p.Nome.Contains(nome)).ToListAsync();
         }
 
         public async Task<Produto> AddProdutoAsync(Produto produto)

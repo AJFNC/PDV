@@ -1,14 +1,15 @@
 ﻿@page "/fetchdata"
 @using PDV.Data
-@inject WeatherForecastService ForecastService
 
-<PageTitle>Weather forecast</PageTitle>
+@inject ProdutoService service
 
-<h1>Weather forecast</h1>
+<PageTitle>Estoque</PageTitle>
 
-<p>This component demonstrates fetching data from a service.</p>
+<h1>Estoque de Produtos</h1>
 
-@if (forecasts == null)
+<p></p>
+
+@if (produtos == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -17,20 +18,29 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Marca</th>
+                <th>Volume</th>
+                <th>Peso</th>
+                <th>Preço</th>
+                <th>Quantidade</th
+                <th>Data</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var produto in produtos)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+@*                    <td>@produto.Date.ToShortDateString()</td>*@
+                    <td>@produto.Nome</td>
+                    <td>@produto.Descricao</td>
+                    <td>@produto.Marca</td>
+                    <td>@produto.Volume</td>
+                    <td>@produto.Peso</td>
+                    <td>@produto.Preco</td>
+                    <td>@produto.Quantidade</td>
+                    <td>@produto.Data</td>
                 </tr>
             }
         </tbody>
@@ -38,10 +48,11 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    //private Produto[]? produtos;
+    List<Produto> produtos = new List<Produto>();
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+        produtos = await service.GetProdutosAsync();
     }
 }

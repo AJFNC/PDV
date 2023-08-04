@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="Shared\Components\Info.razor" />
   </ItemGroup>
 
