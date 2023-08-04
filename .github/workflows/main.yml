@@ -70,7 +70,6 @@ jobs:
         rsync -rv -P -e 'ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}' /home/runner/work/PDV/* ${{ secrets.USERNAME }}@${{ secrets.SERVER }}:/home/${{ secrets.USERNAME }}/
 
     # Testing the ssh conection
-    - name: Test ssh
+    - name: Reinicialização do serviço PDV via ssh
       run: |
-        ssh -i ~/.ssh/github-actions opc@144.22.141.149 sudo systemctl start PDV.service
-        #ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} ls
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} sudo systemctl start PDV.service
