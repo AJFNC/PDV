@@ -72,4 +72,4 @@ jobs:
     # Testing the ssh conection
     - name: Reinicialização do serviço PDV via ssh
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} sudo systemctl start PDV.service
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} sudo systemctl restart PDV.service
