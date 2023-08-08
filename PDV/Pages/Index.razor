@@ -6,138 +6,34 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Distribuidora ACME</h1>
-
-
 @inject ProdutoService service
 
-<div class="p-3 mb-3 bg-primary text-white text-center">Busque um Produto</div>
+<div class="p-3 mb-3 text-white text-center"><img src="logo.png" /></div>
 
 <div class="form-group">
-    <label for="name">Nome do Produto</label>
+@*    <label for="name"></label>
     <input type="text" id="nome" class="form-control" @bind-value="@ChooseProduct.Nome" @onkeyup="(() => GetProdutoByNome())"/>
+*@
+    <select class="form-select" aria-label="Default select example">
+        <option value="1">Escolha a Mesa</option>
+        <option value="1">Mesa 1</option>
+        <option value="2">Mesa 2</option>
+        <option value="3">Mesa 3</option>
+        <option value="2">Mesa 4</option>
+        <option value="3">Mesa 5</option>
+    </select>
+
 </div>
 
 <div class="text-center p-3 mb-3">
-    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())"> Buscar Produto</button>
+    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Abri Caixa</button>
+    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Fechar Caixa</button>
+    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Sangria</button>
+    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Histórico</button>
+    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">?????</button>
 </div>
 
-<div class="container">
-    <div class="row bg-light">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Item</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Marca</th>
-                    <th>Volume</th>
-                    <th>Peso</th>
-                    <th>Preço</th>
-                    <th>Quantidade</th>
-                    <th>Apague Produto</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Produtos.Any())
-                {
-                    @foreach (var produto in Produtos)
-                    {
-                        <tr @onclick="(() => SetProductForUpdate(produto))">
-                            <td>@produto.Id</td>
-                            <td>@produto.Nome</td>
-                            <td>@produto.Descricao</td>
-                            <td>@produto.Marca</td>
-                            <td>@produto.Volume</td>
-                            <td>@produto.Peso</td>
-                            <td>@produto.Preco</td>
-                            <td>@produto.Quantidade</td>
-                            <td><button class="btn btn-danger" @onclick="(() => DeleteProduct(produto))">Apagar</button></td>
-                        </tr>
-                    }
-                }
-                else
-                {
-                    <tr><td colspan="6"><strong>Não tem este Produto</strong></td></tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="row m-5">
-        <div class="col-5 bg-light m-2 justify-content-start">
-            <div class="p-3 mb-3 bg-primary text-white text-center">Adicione Novo Produto</div>
-            <EditForm Model="@NewProduct">
-                <div class="form-group">
-                    <label for="name">Nome do Produto</label>
-                    <input type="text" id="nome" class="form-control" @bind-value="@NewProduct.Nome" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Descrição</label>
-                    <input type="text" id="descricao" class="form-control" @bind="@NewProduct.Descricao" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Marca</label>
-                    <input type="text" id="marca" class="form-control" @bind="@NewProduct.Marca" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Volume</label>
-                    <input type="text" id="volume" class="form-control" @bind="@NewProduct.Volume" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Peso</label>
-                    <input type="text" id="peso" class="form-control" @bind="@NewProduct.Peso" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Preço</label>
-                    <input type="text" id="preco" class="form-control" @bind="@NewProduct.Preco" />
-                </div>
-                <div class="form-group">
-                    <label for="quantity">Quantidade</label>
-                    <input type="text" id="quantidade" class="form-control" @bind="@NewProduct.Quantidade" />
-                </div>
-                <div class="text-center p-3 mb-3">
-                    <button class="btn btn-info" @onclick="AddNewProduct"> Adicionar Produto</button>
-                </div>
-            </EditForm>
-        </div>
-        <div class="col-5 bg-light m-2 justify-content-end">
-            <div class="p-3 mb-3 bg-primary text-white text-center">Atualize Produto</div>
-            <EditForm Model="@UpdateProduct">
-                <div class="form-group">
-                    <label for="name">Nome do Produto</label>
-                    <input type="text" id="nome" class="form-control" @bind-value="@UpdateProduct.Nome" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Descrição</label>
-                    <input type="text" id="descricao" class="form-control" @bind="@UpdateProduct.Descricao" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Marca</label>
-                    <input type="text" id="marca" class="form-control" @bind="@UpdateProduct.Marca" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Volume</label>
-                    <input type="text" id="volume" class="form-control" @bind="@UpdateProduct.Volume" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Peso</label>
-                    <input type="text" id="peso" class="form-control" @bind="@UpdateProduct.Peso" />
-                </div>
-                <div class="form-group">
-                    <label for="price">Preço</label>
-                    <input type="text" id="preco" class="form-control" @bind="@UpdateProduct.Preco" />
-                </div>
-                <div class="form-group">
-                    <label for="quantity">Quantidade</label>
-                    <input type="text" id="quantidade" class="form-control" @bind="@UpdateProduct.Quantidade" />
-                </div>
-                <div class="text-center p-3 mb-3">
-                    <button class="btn btn-info" @onclick="UpdateProductData"> Atualizar Produto</button>
-                </div>
-            </EditForm>
-        </div>
-    </div>
-</div>
+
 @code {
     List<Produto> Produtos = new List<Produto>();
     protected override async Task OnInitializedAsync()

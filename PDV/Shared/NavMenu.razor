@@ -1,32 +1,32 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">PDV</a>
+﻿<div class="top-row ps-3 navbar navbar-dark" style="background-color: #ffc107eb;">
+    <div class="container-fluid" >
+        <a class="navbar-brand text-dark" href=""><span class="oi oi-cart" aria-hidden="true"></span>PDV</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon" ></span>
         </button>
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable" style="background-color: #ffc107eb;" @onclick="ToggleNavMenu">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-plus" aria-hidden="true"></span> Cadastro
+            <NavLink class="nav-link text-dark" href="cadastro" Match="NavLinkMatch.All">
+                <span class="oi oi-plus text-dark" aria-hidden="true"></span> Cadastro
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="estoque">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Estoque
+            <NavLink class="nav-link text-dark" href="estoque">
+                <span class="oi oi-list-rich " aria-hidden="true"></span> Estoque
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="info">
+            <NavLink class="nav-link text-dark" href="info">
                 <span class="oi oi-info" aria-hidden="true"></span> Informações
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="venda">
-                <span class="oi oi-cart" aria-hidden="true"></span> Venda
+            <NavLink class="nav-link text-dark" href="venda">
+                <span class="oi oi-dollar" aria-hidden="true"></span> Venda
             </NavLink>
         </div>
     </nav>

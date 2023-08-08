@@ -36,6 +36,7 @@
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="Shared\Components\Info.razor" />
+    <None Include="wwwroot\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
