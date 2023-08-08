@@ -1,0 +1,75 @@
+# This workflow builds, tests, publishes and deploys this project into OCI VM Bluewater
+
+name: PDV CI/CD
+
+on: 
+  push:
+    branches: [ "Imperio" ]
+  pull_request:
+    branches: [ "Imperio" ]
+    
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Release]
+    runs-on: ubuntu-latest
+    
+    env:
+      Solution_Name: PDV.sln
+      
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.201
+        
+    # You can test your matrix by printing the current dotnet version
+    - name: Display dotnet version
+      run: dotnet --version
+        
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: dotnet restore
+      env:
+        Configuration: ${{ matrix.configuration }}
+        
+    # Build 
+    - name: Build
+      run: dotnet build --no-restore
+      env:
+        Configuration: ${{ matrix.configuration }}
+        
+    # Install the SSH key into the Linux running on Github for this workflow
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with: 
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        name: github-actions
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        config: ${{ secrets.CONFIG }}
+        if_key_exists: fail
+
+    # Publish the project
+    - name: Publish
+      run: dotnet publish
+      env:
+        Configuration: ${{ matrix.configuration }}
+        
+    # Deploy to the OCI VM
+    - name: Deploy to the OCI VM Server
+      run: |
+        #rsync -rv --dry-run  -P -e 'ssh -i /home/runner/.ssh/ssh-key-2021-04-19' /home/runner/work/PDV/* opc@144.22.141.149:/home/opc/
+        #rsync -rv --dry-run  -P -e 'ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}' /home/runner/work/PDV/* opc@${{ secrets.SERVER }}:/home/opc/
+        rsync -rv -P -e 'ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}' /home/runner/work/PDV/* ${{ secrets.USERNAME }}@${{ secrets.SERVER }}:/home/${{ secrets.USERNAME }}/
+
+    # Testing the ssh conection
+    - name: Reinicializacao do servico PDV via ssh
+      run: |
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ${{ secrets.USERNAME }}@${{ secrets.SERVER }} sudo systemctl restart PDV.service
