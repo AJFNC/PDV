@@ -167,9 +167,13 @@
     public Produto NewProduct { get; set; } = new Produto();
     private async Task AddNewProduct()
     {
-        await service.AddProdutoAsync(NewProduct);
-        NewProduct = new Produto();
-        await RefreshProducts();
+        if(NewProduct.Quantidade != null)
+        {
+            await service.AddProdutoAsync(NewProduct);
+            NewProduct = new Produto();
+            await RefreshProducts();
+        }
+
     }
     Produto UpdateProduct = new Produto();
     private void SetProductForUpdate(Produto produto)

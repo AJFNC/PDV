@@ -32,6 +32,7 @@ namespace PDV.Data
 
         public async Task<Produto> AddProdutoAsync(Produto produto)
         {
+            if(produto.Quantidade == null) throw new ArgumentNullException(nameof(produto));
             try
             {
                 _context.Produtos.Add(produto);
