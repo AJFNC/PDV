@@ -1,4 +1,5 @@
 ﻿@page "/estoque"
+
 @using PDV.Data
 
 @inject ProdutoService service
@@ -52,7 +53,9 @@ else
 }
 
 @code {
-    //private Produto[]? produtos;
+
+    //public int? serv { get; set; }
+
     List<Produto> produtos = new List<Produto>();
 
     protected override async Task OnInitializedAsync()

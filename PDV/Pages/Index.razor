@@ -3,18 +3,23 @@
 @using PDV.Shared.Components
 @using PDV.Data
 
+@inject NavigationManager NavManager
+@inject ProdutoService service
 
 <PageTitle>Index</PageTitle>
 
-@inject ProdutoService service
+
 
 <div class="p-3 mb-3 text-white text-center"><img src="logo.png" /></div>
 
 <div class="form-group">
 @*    <label for="name"></label>
     <input type="text" id="nome" class="form-control" @bind-value="@ChooseProduct.Nome" @onkeyup="(() => GetProdutoByNome())"/>
+
+    @onchange="@CallService"
+
 *@
-    <select class="form-select" aria-label="Default select example" @onchange="@CallService">
+    <select class="form-select" aria-label="Default select example" @onchange="@GetTable">
 
         <option value=0>Escolha uma mesa</option>
         @for (int i=1;i<=5;i++)
@@ -30,61 +35,15 @@
 <div><p>Mesa selecionada: @mesaSel</p></div>
 
 <div class="text-center p-3 mb-3">
-    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Abri Caixa</button>
-    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Fechar Caixa</button>
-    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Sangria</button>
-    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">Histórico</button>
-    <button class="btn btn-info" @onclick="(() => GetProdutoByNome())">?????</button>
+    <button class="btn btn-info" @onclick="@CallOpen">Abri Caixa</button>
+    <button class="btn btn-info" @onclick="@CallClose">Fechar Caixa</button>
+    <button class="btn btn-info" @onclick="@CallBleed">Sangria</button>
+    <button class="btn btn-info" @onclick="@CallList">Histórico</button>
+    <button class="btn btn-info" @onclick="@CallService">?????</button>
 </div>
 
 
 @code {
-    List<Produto> Produtos = new List<Produto>();
-    protected override async Task OnInitializedAsync()
-    {
-        await RefreshProducts();
-    }
-
-    private async Task RefreshProducts()
-    {
-        Produtos = await service.GetProdutosAsync();
-        //Produtos = await service.GetProdutoByNomeAsync();
-    }
-
-    private async Task RefreshProductByNome(string nome)
-    {
-        Produtos = await service.GetProdutoByNomeAsync(nome);
-    }
-
-    Produto ChooseProduct = new Produto();
-    private async Task GetProdutoByNome()
-    {
-        //ChooseProduct = produto;
-        await RefreshProductByNome(ChooseProduct.Nome);
-    }
-
-    public Produto NewProduct { get; set; } = new Produto();
-    private async Task AddNewProduct()
-    {
-        await service.AddProdutoAsync(NewProduct);
-        NewProduct = new Produto();
-        await RefreshProducts();
-    }
-    Produto UpdateProduct = new Produto();
-    private void SetProductForUpdate(Produto produto)
-    {
-        UpdateProduct = produto;
-    }
-    private async Task UpdateProductData()
-    {
-        await service.UpdateProdutoAsync(UpdateProduct);
-        await RefreshProducts();
-    }
-    private async Task DeleteProduct(Produto produto)
-    {
-        await service.DeleteProdutoAsync(produto);
-        await RefreshProducts();
-    }
 
 
     string? mesa;
@@ -92,14 +51,11 @@
 
     //Console.WriteLine(mesa);
 
-
-    private void CallService(ChangeEventArgs e)
+    private void GetTable(ChangeEventArgs e)
     {
         mesa = e.Value.ToString();
-
-        Console.Write(mesaSel);
-
-        switch (mesa) {
+        switch (mesa)
+        {
             case "1":
                 mesaSel = "1";
                 break;
@@ -119,6 +75,33 @@
                 mesaSel = "Escolha a mesa";
                 break;
         }
+
+    }
+
+
+    private void CallOpen()
+    {
+        NavManager.NavigateTo($"/venda/{mesaSel}");
+    }
+
+    private void CallClose()
+    {
+        NavManager.NavigateTo($"/venda/{mesaSel}");
+    }
+
+    private void CallBleed()
+    {
+        NavManager.NavigateTo("/cadastro");
+    }
+
+    private void CallList()
+    {
+        NavManager.NavigateTo("/estoque");
+    }
+
+    private void CallService()
+    {
+        
     }
 }
 

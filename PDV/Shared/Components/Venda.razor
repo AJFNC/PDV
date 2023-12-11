@@ -1,4 +1,6 @@
 ﻿@page "/venda"
+@page "/venda/{mesaSelec}"
+
 
 <PageTitle>Venda</PageTitle>
 
@@ -8,9 +10,9 @@
 
 <h1>Pedido</h1>
 
-<h2>Mesa: </h2><p>@mesaSelec</p>
+<h2>Mesa: @mesaSelec</h2>
 
 @code {
-    private string mesaSelec = "Escolha a mesa";
-
+    [Parameter]
+    public string mesaSelec { get; set; } = "Escolha a mesa";
 }
